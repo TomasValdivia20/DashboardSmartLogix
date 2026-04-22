@@ -40,31 +40,77 @@
               <h1
                 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200"
               >
-                Create account
+                Crear Cuenta 
               </h1>
+
               <label class="block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Email</span>
+                <span class="text-gray-700 dark:text-gray-400">Nombre de la empresa</span>
                 <input
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="Jane Doe"
+                  placeholder="Nombre"
                 />
               </label>
+
+               <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Rut</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="12.345.678-9"
+                />
+              </label>
+
+               <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Correo</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="Correo electrónico"
+                />
+              </label>
+
+              <label for="buscador">Codigo de actividad económica:</label>
+                <input list="opciones" id="buscador" name="buscador" placeholder="Escribe para buscar...">
+
+                <datalist id="opciones">
+                  <option value="Opción 1">
+                  <option value="Opción 2">
+                  <option value="Opción 3">
+                  <option value="Otra opción">
+                </datalist>
+              </input>
+
               <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Password</span>
+                <span class="text-gray-700 dark:text-gray-400">Contraseña</span>
                 <input
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="***************"
                   type="password"
                 />
               </label>
+
               <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
-                  Confirm password
+                  Confirmar contraseña
                 </span>
                 <input
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="***************"
                   type="password"
+                />
+              </label>
+
+               <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Dirección</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="Dirección completa"
+                />
+              </label>
+
+               <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Telefono</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="Número de teléfono"
                 />
               </label>
 
@@ -75,8 +121,8 @@
                     class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                   />
                   <span class="ml-2">
-                    I agree to the
-                    <span class="underline">privacy policy</span>
+                    Acepto la
+                    <span class="underline">política de privacidad</span>
                   </span>
                 </label>
               </div>
@@ -86,7 +132,7 @@
                 class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 href="./login.html"
               >
-                Create account
+                Crear cuenta
               </a>
 
               <hr class="my-8" />
@@ -127,7 +173,7 @@
                   class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                   href="./login.html"
                 >
-                  Already have an account? Login
+                  ¿Ya tienes una cuenta? Inicia sesión
                 </a>
               </p>
             </div>
