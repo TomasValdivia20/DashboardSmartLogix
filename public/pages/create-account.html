@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create account - Windmill Dashboard</title>
+    <title>Crea una cuenta en SmartLogix</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -44,10 +44,10 @@
               </h1>
 
               <label class="block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">Nombre de la empresa</span>
+                <span class="text-gray-700 dark:text-gray-400">Nombre de la empresa o Razón Social</span>
                 <input
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="Nombre"
+                  placeholder="Nombre o Razón Social"
                 />
               </label>
 
@@ -68,13 +68,11 @@
               </label>
 
               <label for="buscador">Codigo de actividad económica:</label>
-                <input list="opciones" id="buscador" name="buscador" placeholder="Escribe para buscar...">
+                <input list="opciones" id="buscador" name="buscador" placeholder="Selecciona tu opción..."
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
 
                 <datalist id="opciones">
-                  <option value="Opción 1">
-                  <option value="Opción 2">
-                  <option value="Opción 3">
-                  <option value="Otra opción">
+                  <!-- Las opciones serán cargadas dinámicamente por JavaScript -->
                 </datalist>
               </input>
 
@@ -182,4 +180,20 @@
       </div>
     </div>
   </body>
+    <script>
+      // Cargar los códigos de actividad económica desde el JSON y agregarlos al datalist
+      fetch('../assets/js/codigos_actividad_sii.json')
+        .then(response => response.json())
+        .then(data => {
+          const datalist = document.getElementById('opciones');
+          data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = `${item.codigo} - ${item.nombre}`;
+            datalist.appendChild(option);
+          });
+        })
+        .catch(error => {
+          console.error('Error cargando los códigos SII:', error);
+        });
+    </script>
 </html>
