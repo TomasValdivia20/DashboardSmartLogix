@@ -20,7 +20,6 @@
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen}"
     >
-      <!-- Desktop sidebar -->
       <aside
         class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
       >
@@ -80,6 +79,28 @@
                   ></path>
                 </svg>
                 <span class="ml-4">Gestión Inventario</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="ProcesamientoPedidos.html"
+              >
+                <svg
+                  class="w-5 h-5"
+                  aria-hidden="true"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                  ></path>
+                </svg>
+                <span class="ml-4">Procesamiento Pedidos</span>
               </a>
             </li>
             <li class="relative px-6 py-3">
@@ -152,12 +173,8 @@
               </template>
             </li>
           </ul>
-          <div class="px-6 my-6">
-          </div>
         </div>
       </aside>
-      <!-- Mobile sidebar -->
-      <!-- Backdrop -->
       <div
         x-show="isSideMenuOpen"
         x-transition:enter="transition ease-in-out duration-150"
@@ -296,6 +313,38 @@
                   ></path>
                 </svg>
               </button>
+              <template x-if="isPagesMenuOpen">
+                <ul
+                  x-transition:enter="transition-all ease-in-out duration-300"
+                  x-transition:enter-start="opacity-25 max-h-0"
+                  x-transition:enter-end="opacity-100 max-h-xl"
+                  x-transition:leave="transition-all ease-in-out duration-300"
+                  x-transition:leave-start="opacity-100 max-h-xl"
+                  x-transition:leave-end="opacity-0 max-h-0"
+                  class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                  aria-label="submenu"
+                >
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/login.html">Iniciar sesión</a>
+                  </li>
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/create-account.html">
+                      Crear cuenta
+                    </a>
+                  </li>
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/forgot-password.html">
+                      Olvidé mi contraseña
+                    </a>
+                  </li>
+                </ul>
+              </template>
             </li>
           </ul>
         </div>
@@ -305,7 +354,6 @@
           <div
             class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300"
           >
-            <!-- Mobile hamburger -->
             <button
               class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
               @click="toggleSideMenu"
@@ -324,7 +372,6 @@
                 ></path>
               </svg>
             </button>
-            <!-- Search input -->
             <div class="flex justify-center flex-1 lg:mr-32">
               <div
                 class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
@@ -352,7 +399,6 @@
               </div>
             </div>
             <ul class="flex items-center flex-shrink-0 space-x-6">
-              <!-- Theme toggler -->
               <li class="flex">
                 <button
                   class="rounded-md focus:outline-none focus:shadow-outline-purple"
@@ -387,7 +433,6 @@
                   </template>
                 </button>
               </li>
-              <!-- Notifications menu -->
               <li class="relative">
                 <button
                   class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
@@ -406,7 +451,6 @@
                       d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
                     ></path>
                   </svg>
-                  <!-- Notification badge -->
                   <span
                     aria-hidden="true"
                     class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"
@@ -459,7 +503,6 @@
                   </ul>
                 </template>
               </li>
-              <!-- Profile menu -->
               <li class="relative">
                 <button
                   class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
@@ -558,6 +601,7 @@
             </ul>
           </div>
         </header>
+
         <main
           class="h-full pb-16 overflow-y-auto"
           x-init="fetchProductos()"
@@ -565,63 +609,84 @@
             searchQuery: '',
             selectedWarehouses: ['todas'],
             products: [], 
-            
-            // LA MAGIA: Esta función trae los datos reales del BFF
-            async fetchProductos() {
-              const token = localStorage.getItem('access_token');
-              
-              if(!token) {
-                 window.location.href = 'pages/login.html';
-                 return;
-              }
-
-              try {
-                // 1. URL CORREGIDA: Apuntamos a /api/productos/ que es lo que dice tu Swagger
-                const response = await fetch('http://127.0.0.1:8000/api/productos', {
-                  method: 'GET',
-                  headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json'
-                  }
-                });
-                
-                if (response.ok) {
-                  const datosBackend = await response.json();
-                  
-                  // 2. EL TRADUCTOR: Mapeamos los campos del ms-inventario al HTML
-                  this.products = datosBackend.map(item => ({
-                    nombre: item.nombre,
-                    skuId: item.sku,                     // Backend usa 'sku'
-                    stockTotal: item.stock_actual,       // Backend usa 'stock_actual'
-                    umbralMin: item.umbral_critico,      // Backend usa 'umbral_critico'
-                    estado: item.estado,
-                    bodegaA: item.stock_actual,
-                    bodegaB: 0 
-                  }));
-                  
-                } else if (response.status === 401) {
-                  alert('Tu sesión expiró. Vuelve a iniciar sesión.');
-                  localStorage.removeItem('access_token');
-                  window.location.href = 'pages/login.html';
-                } else {
-                  console.error('Error del servidor:', await response.text());
-                }
-              } catch(error) {
-                console.error('Error de red:', error);
-                alert('No se pudo conectar con el servidor BFF.');
-              }
+            isAddModalOpen: false,
+            newProduct: {
+              nombre: '', sku: '', descripcion: '', tipo_carga: 'General',
+              bodega_id: 'de305d54-75b4-431b-adb2-eb6b9e546013',
+              stock_actual: 0, umbral_critico: 0, umbral_bajo: 0,
+              precio_costo: 0, precio_venta: 0
             },
 
-            // Las funciones de tu compañero para calcular totales y filtros quedan intactas
+            async fetchProductos() {
+              const token = localStorage.getItem('access_token');
+              if(!token) return window.location.href = 'pages/login.html';
+              try {
+                const response = await fetch('http://127.0.0.1:8000/api/productos', {
+                  method: 'GET',
+                  headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+                });
+                if (response.ok) {
+                  const data = await response.json();
+                  const ID_CENTRAL = 'de305d54-75b4-431b-adb2-eb6b9e546013';
+                  const ID_NORTE = 'f47ac10b-58cc-4372-a567-0e02b2c3d479';
+                  
+                  this.products = data.map(item => ({
+                    nombre: item.nombre,
+                    skuId: item.sku,
+                    descripcion: item.descripcion,
+                    tipoCarga: item.tipo_carga_display,
+                    precioCosto: item.precio_costo,
+                    precioVenta: item.precio_venta,
+                    stockTotal: item.stock_actual,
+                    umbralMin: item.umbral_critico,
+                    estado: item.estado,
+                    bodegaA: item.bodega_id === ID_CENTRAL ? item.stock_actual : 0,
+                    bodegaB: item.bodega_id === ID_NORTE ? item.stock_actual : 0,
+                    activo: item.activo,
+                    fecha: new Date(item.fecha_creacion).toLocaleDateString()
+                  }));
+                }
+              } catch(e) { console.error(e); }
+            },
+
+            async guardarProducto() {
+              const token = localStorage.getItem('access_token');
+              const payload = {
+                ...this.newProduct,
+                stock_actual: parseInt(this.newProduct.stock_actual),
+                umbral_critico: parseInt(this.newProduct.umbral_critico),
+                umbral_bajo: parseInt(this.newProduct.umbral_bajo),
+                precio_costo: parseFloat(this.newProduct.precio_costo),
+                precio_venta: parseFloat(this.newProduct.precio_venta),
+                activo: true
+              };
+              try {
+                const response = await fetch('http://127.0.0.1:8000/api/productos', {
+                  method: 'POST',
+                  headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+                });
+                if(response.ok) {
+                  this.isAddModalOpen = false;
+                  this.newProduct = { nombre: '', sku: '', descripcion: '', tipo_carga: 'General', bodega_id: 'de305d54-75b4-431b-adb2-eb6b9e546013', stock_actual: 0, umbral_critico: 0, umbral_bajo: 0, precio_costo: 0, precio_venta: 0 };
+                  await this.fetchProductos();
+                } else {
+                    const err = await response.json();
+                    alert('Error: ' + JSON.stringify(err));
+                }
+              } catch(e) { alert('Error de conexión'); }
+            },
+
             get totalSKUs() { return this.products.length; },
             get stockCritico() { return this.products.filter(p => p.estado === 'Crítico').length; },
             get filteredProducts() {
               return this.products.filter(p => {
-                const matchSearch = p.nombre.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                                    p.skuId.toLowerCase().includes(this.searchQuery.toLowerCase());
+                const matchSearch = p.nombre.toLowerCase().includes(this.searchQuery.toLowerCase()) || p.skuId.toLowerCase().includes(this.searchQuery.toLowerCase());
+                
                 const matchWh = this.selectedWarehouses.includes('todas') ||
                                 (this.selectedWarehouses.includes('bodega-central') && p.bodegaA > 0) ||
                                 (this.selectedWarehouses.includes('sucursal-norte') && p.bodegaB > 0);
+                
                 return matchSearch && matchWh;
               });
             },
@@ -641,307 +706,211 @@
             isWarehouseSelected(val) { return this.selectedWarehouses.includes(val); }
           }"
         >
+          
           <div class="container px-6 mx-auto grid">
-          <div class="container px-6 mx-auto grid">
-            <h2
-              class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-            >
-              Gestión de Inventario
-            </h2>
+            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Gestión de Inventario</h2>
 
-            <!--  Indicadores de Inventario -->
             <div class="grid gap-6 mb-8 md:grid-cols-3">
-
-              <!-- Carta del Total de SKUs -->
-              <div
-                class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-              >
-                <div
-                  class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500"
-                >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
-                    ></path>
-                  </svg>
+              <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
                 </div>
                 <div>
-                  <p
-                    class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
-                  >
-                    Total SKUs
-                  </p>
-                  <p
-                    class="text-lg font-semibold text-gray-700 dark:text-gray-200"
-                    x-text="totalSKUs"
-                  ></p>
+                  <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total SKUs</p>
+                  <p class="text-lg font-semibold text-gray-700 dark:text-gray-200" x-text="totalSKUs"></p>
                 </div>
               </div>
-
-              <!-- Carta de Stock Crítico -->
-              <div
-                class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-              >
-                <div
-                  class="p-3 mr-4 text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500"
-                >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
+              <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                 </div>
                 <div>
-                  <p
-                    class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
-                  >
-                    Stock Crítico
-                  </p>
-                  <p
-                    class="text-lg font-semibold text-red-600 dark:text-red-400"
-                    x-text="stockCritico + ' productos'"
-                  ></p>
+                  <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Stock Crítico</p>
+                  <p class="text-lg font-semibold text-red-600 dark:text-red-400" x-text="stockCritico + ' productos'"></p>
                 </div>
               </div>
-
-              <!-- Carta: Sincronización en tiempo real -->
-              <div
-                class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-              >
-                <div
-                  class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500"
-                >
+              <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                      clip-rule="evenodd"
-                    ></path>
+                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
                   </svg>
                 </div>
                 <div class="flex flex-col">
-                  <p
-                    class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
-                  >
-                    Sincronización
-                  </p>
+                  <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Sincronización</p>
                   <div class="flex items-center space-x-2">
                     <span class="relative flex h-3 w-3">
-                      <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-                      ></span>
-                      <span
-                        class="relative inline-flex rounded-full h-3 w-3 bg-green-500"
-                      ></span>
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </span>
-                    <span
-                      class="text-sm font-semibold text-green-600 dark:text-green-400"
-                    >
-                      En línea
-                    </span>
+                    <span class="text-sm font-semibold text-green-600 dark:text-green-400">En línea</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Filtros y Acciones del inventario -->
-            <div
-              class="flex flex-col gap-4 mb-6 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 md:flex-row md:items-center"
-            >
-              <!-- Selector de bodega (múltiple) -->
+            <div class="flex flex-col gap-4 mb-6 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800 md:flex-row md:items-center">
               <div class="flex flex-col gap-1">
-                <label
-                  class="text-xs font-semibold text-gray-500 uppercase dark:text-gray-400"
-                >
-                  Bodega
-                </label>
+                <label class="text-xs font-semibold text-gray-500 uppercase dark:text-gray-400">Bodega</label>
                 <div class="flex flex-wrap gap-2">
-                  <button
-                    @click="toggleWarehouse('todas')"
-                    :class="isWarehouseSelected('todas')
-                      ? 'bg-purple-600 text-white border-purple-600'
-                      : 'bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'"
-                    class="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none focus:shadow-outline-purple"
-                  >
-                    Todas
-                  </button>
-                  <button
-                    @click="toggleWarehouse('bodega-central')"
-                    :class="isWarehouseSelected('bodega-central')
-                      ? 'bg-purple-600 text-white border-purple-600'
-                      : 'bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'"
-                    class="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none focus:shadow-outline-purple"
-                  >
-                    Bodega Central
-                  </button>
-                  <button
-                    @click="toggleWarehouse('sucursal-norte')"
-                    :class="isWarehouseSelected('sucursal-norte')
-                      ? 'bg-purple-600 text-white border-purple-600'
-                      : 'bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'"
-                    class="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none focus:shadow-outline-purple"
-                  >
-                    Sucursal Norte
-                  </button>
+                  <button @click="toggleWarehouse('todas')" :class="isWarehouseSelected('todas') ? 'bg-purple-600 text-white border-purple-600' : 'bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'" class="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none focus:shadow-outline-purple">Todas</button>
+                  <button @click="toggleWarehouse('bodega-central')" :class="isWarehouseSelected('bodega-central') ? 'bg-purple-600 text-white border-purple-600' : 'bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'" class="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none focus:shadow-outline-purple">Bodega Central</button>
+                  <button @click="toggleWarehouse('sucursal-norte')" :class="isWarehouseSelected('sucursal-norte') ? 'bg-purple-600 text-white border-purple-600' : 'bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600'" class="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none focus:shadow-outline-purple">Sucursal Norte</button>
                 </div>
               </div>
-
-              
-              <div
-                class="hidden md:block w-px self-stretch bg-gray-200 dark:bg-gray-700 mx-2"
-              ></div>
-
-              <!-- Buscador sensible al producto -->
+              <div class="hidden md:block w-px self-stretch bg-gray-200 dark:bg-gray-700 mx-2"></div>
               <div class="flex-1">
-                <label
-                  class="block mb-1 text-xs font-semibold text-gray-500 uppercase dark:text-gray-400"
-                >
-                  Buscar producto
-                </label>
-                <div class="relative focus-within:text-purple-500">
-                  <div class="absolute inset-y-0 flex items-center pl-3">
-                    <svg
-                      class="w-4 h-4"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
+                  <label class="block mb-1 text-xs font-semibold text-gray-500 uppercase dark:text-gray-400">Buscar producto</label>
+                  <div class="relative focus-within:text-purple-500">
+                    <div class="absolute inset-y-0 flex items-center pl-3">
+                      <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    <input x-model="searchQuery" type="text" placeholder="Nombre o SKU..." class="w-full pl-10 pr-4 py-2 text-sm text-gray-700 bg-gray-100 border-0 rounded-md dark:bg-gray-700 dark:text-gray-200 focus:bg-white focus:outline-none focus:shadow-outline-purple form-input" />
                   </div>
-                  <input
-                    x-model="searchQuery"
-                    type="text"
-                    placeholder="Nombre o SKU..."
-                    class="w-full pl-10 pr-4 py-2 text-sm text-gray-700 placeholder-gray-500 bg-gray-100 border-0 rounded-md dark:placeholder-gray-400 dark:bg-gray-700 dark:text-gray-200 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                  />
-                </div>
               </div>
-
-              <!-- Botón agregar producto Falta back -->
               <div class="flex items-end">
-                <button
-                  class="flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg hover:bg-purple-700 active:bg-purple-600 focus:outline-none focus:shadow-outline-purple"
-                >
-                  <svg
-                    class="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M12 4v16m8-8H4"
-                    ></path>
-                  </svg>
+                <button @click="isAddModalOpen = true" class="flex items-center px-4 py-2 text-sm font-medium leading-5 text-white bg-purple-600 border border-transparent rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
                   Agregar Producto
                 </button>
               </div>
             </div>
 
-            <!--  Matriz de Inventario general -->
             <div class="w-full overflow-hidden rounded-lg shadow-xs mb-8">
               <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
+                <table class="w-full whitespace-no-wrap min-w-[1200px]">
                   <thead>
-                    <tr
-                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-                    >
+                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                       <th class="px-4 py-3">Producto</th>
+                      <th class="px-4 py-3">Descripción</th>
+                      <th class="px-4 py-3">Tipo Carga</th>
+                      <th class="px-4 py-3 text-right">Costo</th>
+                      <th class="px-4 py-3 text-right">Venta</th>
                       <th class="px-4 py-3 text-right">Stock Total</th>
-                      <th class="px-4 py-3 text-right">Bodega Central (A)</th>
-                      <th class="px-4 py-3 text-right">Sucursal Norte (B)</th>
-                      <th class="px-4 py-3 text-right">Umbral Mínimo</th>
+                      <th class="px-4 py-3 text-right">Bodega A</th>
+                      <th class="px-4 py-3 text-right">Bodega B</th>
+                      <th class="px-4 py-3 text-right">Umbral Min</th>
                       <th class="px-4 py-3 text-center">Estado</th>
+                      <th class="px-4 py-3 text-center">Activo</th>
+                      <th class="px-4 py-3">Fecha</th>
                     </tr>
                   </thead>
-                  <tbody
-                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-                  >
+                  <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     <template x-for="product in filteredProducts" :key="product.skuId">
                       <tr class="text-gray-700 dark:text-gray-400">
-                        <!-- Producto -->
                         <td class="px-4 py-3">
                           <div class="flex flex-col">
-                            <span
-                              class="text-sm font-semibold text-gray-700 dark:text-gray-200"
-                              x-text="product.nombre"
-                            ></span>
-                            <span
-                              class="text-xs text-gray-500 dark:text-gray-400"
-                              x-text="product.skuId"
-                            ></span>
+                            <span class="text-sm font-semibold" x-text="product.nombre"></span>
+                            <span class="text-xs text-gray-500" x-text="product.skuId"></span>
                           </div>
                         </td>
-                        <!-- Stock Total -->
-                        <td class="px-4 py-3 text-sm text-right font-medium"
-                          :class="product.stockTotal <= product.umbralMin
-                            ? 'text-red-600 dark:text-red-400'
-                            : 'text-gray-700 dark:text-gray-200'"
-                          x-text="product.stockTotal"
-                        ></td>
-                        <!-- Bodega A -->
-                        <td
-                          class="px-4 py-3 text-sm text-right text-gray-700 dark:text-gray-300"
-                          x-text="product.bodegaA"
-                        ></td>
-                        <!-- Bodega B -->
-                        <td
-                          class="px-4 py-3 text-sm text-right text-gray-700 dark:text-gray-300"
-                          x-text="product.bodegaB"
-                        ></td>
-                        <!-- Umbral Mínimo -->
-                        <td
-                          class="px-4 py-3 text-sm text-right text-gray-500 dark:text-gray-400"
-                          x-text="product.umbralMin"
-                        ></td>
-                        <!-- Estado -->
-                        <td class="px-4 py-3 text-xs text-center">
-                          <span
-                            :class="{
-                              'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100': product.estado === 'Normal',
-                              'text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100': product.estado === 'Crítico',
-                              'text-orange-700 bg-orange-100 dark:bg-orange-600 dark:text-white': product.estado === 'Bajo'
-                            }"
-                            class="px-2 py-1 font-semibold leading-tight rounded-full"
-                            x-text="product.estado"
-                          ></span>
+                        <td class="px-4 py-3">
+                          <div class="text-xs text-gray-500 whitespace-normal w-48" x-text="product.descripcion"></div>
                         </td>
+                        <td class="px-4 py-3 text-sm" x-text="product.tipoCarga"></td>
+                        <td class="px-4 py-3 text-sm text-right" x-text="'$' + product.precioCosto"></td>
+                        <td class="px-4 py-3 text-sm text-right font-bold" x-text="'$' + product.precioVenta"></td>
+                        <td class="px-4 py-3 text-sm text-right font-medium" :class="product.stockTotal <= product.umbralMin ? 'text-red-600' : ''" x-text="product.stockTotal"></td>
+                        <td class="px-4 py-3 text-sm text-right" x-text="product.bodegaA"></td>
+                        <td class="px-4 py-3 text-sm text-right" x-text="product.bodegaB"></td>
+                        <td class="px-4 py-3 text-sm text-right text-gray-500" x-text="product.umbralMin"></td>
+                        <td class="px-4 py-3 text-xs text-center">
+                          <span :class="{'text-green-700 bg-green-100': product.estado==='Normal', 'text-red-700 bg-red-100': product.estado==='Crítico', 'text-orange-700 bg-orange-100': product.estado==='Bajo'}" class="px-2 py-1 font-semibold leading-tight rounded-full" x-text="product.estado"></span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-center">
+                          <span :class="product.activo ? 'text-blue-700 bg-blue-100' : 'text-gray-700 bg-gray-100'" class="px-2 py-1 font-semibold leading-tight rounded-full" x-text="product.activo ? 'Sí' : 'No'"></span>
+                        </td>
+                        <td class="px-4 py-3 text-sm" x-text="product.fecha"></td>
                       </tr>
                     </template>
-                    <!-- Mensaje si no hay productos -->
                     <tr x-show="filteredProducts.length === 0">
-                      <td
-                        colspan="6"
-                        class="px-4 py-6 text-sm text-center text-gray-500 dark:text-gray-400"
-                      >
-                        No se encontraron productos.
-                      </td>
+                      <td colspan="12" class="px-4 py-6 text-sm text-center text-gray-500">No se encontraron productos.</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <!-- Footer de tabla -->
-              <div
-                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
-              >
+              <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:bg-gray-800">
                 <span class="flex items-center col-span-3">
-                  Mostrando
-                  <span class="mx-1 font-bold" x-text="filteredProducts.length"></span>
-                  de
-                  <span class="mx-1 font-bold" x-text="products.length"></span>
-                  productos
+                  Mostrando <span class="mx-1 font-bold" x-text="filteredProducts.length"></span> de <span class="mx-1 font-bold" x-text="products.length"></span> productos
                 </span>
               </div>
             </div>
+
+            <div x-show="isAddModalOpen" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-30 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center" style="display: none;">
+              <div @click.away="isAddModalOpen = false" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 transform translate-y-1/2 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 transform translate-y-1/2 sm:translate-y-0 sm:scale-95" class="w-full px-6 py-4 overflow-hidden bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:max-w-2xl" role="dialog">
+                <header class="flex justify-between mb-4">
+                  <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">Registrar Nuevo Producto</p>
+                  <button class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover:hover:text-gray-700" aria-label="close" @click="isAddModalOpen = false">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                  </button>
+                </header>
+                
+                <form @submit.prevent="guardarProducto()">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <label class="block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">Nombre del Producto</span>
+                      <input x-model="newProduct.nombre" required class="block w-full mt-1 text-sm dark:bg-gray-700 form-input" placeholder="Ej: Teclado Mecánico" />
+                    </label>
+                    <label class="block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">SKU</span>
+                      <input x-model="newProduct.sku" required class="block w-full mt-1 text-sm dark:bg-gray-700 form-input" placeholder="Ej: SKU-001" />
+                    </label>
+                    <label class="block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">Precio Costo ($)</span>
+                      <input x-model="newProduct.precio_costo" type="number" required class="block w-full mt-1 text-sm dark:bg-gray-700 form-input" />
+                    </label>
+                    <label class="block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">Precio Venta ($)</span>
+                      <input x-model="newProduct.precio_venta" type="number" required class="block w-full mt-1 text-sm dark:bg-gray-700 form-input" />
+                    </label>
+                    <label class="block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">Stock Inicial</span>
+                      <input x-model="newProduct.stock_actual" type="number" required class="block w-full mt-1 text-sm dark:bg-gray-700 form-input" />
+                    </label>
+                    <div class="flex gap-2">
+                      <label class="block text-sm w-1/2">
+                        <span class="text-gray-700 dark:text-gray-400">Umbral Bajo</span>
+                        <input x-model="newProduct.umbral_bajo" type="number" required class="block w-full mt-1 text-sm dark:bg-gray-700 form-input" />
+                      </label>
+                      <label class="block text-sm w-1/2">
+                        <span class="text-gray-700 dark:text-gray-400">Umbral Crítico</span>
+                        <input x-model="newProduct.umbral_critico" type="number" required class="block w-full mt-1 text-sm dark:bg-gray-700 form-input" />
+                      </label>
+                    </div>
+                    <label class="block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">Tipo de Carga</span>
+                      <select x-model="newProduct.tipo_carga" class="block w-full mt-1 text-sm dark:bg-gray-700 form-select">
+                        <option value="General">Carga General</option>
+                        <option value="Fragil">Frágil</option>
+                        <option value="DuroResistente">Duro/Resistente</option>
+                        <option value="Peligrosa">Carga Peligrosa</option>
+                        <option value="Perecedera">Carga Perecedera</option>
+                        <option value="Voluminosa">Carga Voluminosa</option>
+                      </select>
+                    </label>
+                    <label class="block text-sm">
+                      <span class="text-gray-700 dark:text-gray-400">Asignar a Bodega</span>
+                      <select x-model="newProduct.bodega_id" class="block w-full mt-1 text-sm dark:bg-gray-700 form-select">
+                        <option value="de305d54-75b4-431b-adb2-eb6b9e546013">Bodega Central</option>
+                        <option value="f47ac10b-58cc-4372-a567-0e02b2c3d479">Sucursal Norte</option>
+                      </select>
+                    </label>
+                  </div>
+                  
+                  <label class="block text-sm mb-6">
+                    <span class="text-gray-700 dark:text-gray-400">Descripción</span>
+                    <textarea x-model="newProduct.descripcion" class="block w-full mt-1 text-sm dark:bg-gray-700 form-textarea" rows="2" placeholder="Detalles del producto..."></textarea>
+                  </label>
+
+                  <footer class="flex justify-end gap-4 mt-4">
+                    <button type="button" @click="isAddModalOpen = false" class="px-4 py-2 text-sm font-medium text-gray-700 border rounded-lg hover:border-gray-500">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700">Guardar Producto</button>
+                  </footer>
+                </form>
+              </div>
+            </div>
+
           </div>
         </main>
       </div>
