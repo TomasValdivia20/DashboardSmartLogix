@@ -83,29 +83,6 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="ProcesamientoPedidos.html"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-                  ></path>
-                </svg>
-                <span class="ml-4">Procesamiento Pedidos</span>
-              </a>
-            </li>
-
-            <li class="relative px-6 py-3">
               <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 @click="togglePagesMenu"
@@ -583,21 +560,59 @@
         </header>
         <main
           class="h-full pb-16 overflow-y-auto"
+          x-init="fetchProductos()"
           x-data="{
             searchQuery: '',
             selectedWarehouses: ['todas'],
-            products: [
-              { nombre: 'Camiseta Básica Blanca',   skuId: 'SKU-001', stockTotal: 320, bodegaA: 200, bodegaB: 120, umbralMin: 50,  estado: 'Normal' },
-              { nombre: 'Zapatilla Running Pro',     skuId: 'SKU-002', stockTotal: 18,  bodegaA: 10,  bodegaB: 8,   umbralMin: 30,  estado: 'Crítico' },
-              { nombre: 'Mochila Urbana 30L',        skuId: 'SKU-003', stockTotal: 75,  bodegaA: 40,  bodegaB: 35,  umbralMin: 20,  estado: 'Normal' },
-              { nombre: 'Pantalón Cargo Negro',      skuId: 'SKU-004', stockTotal: 12,  bodegaA: 5,   bodegaB: 7,   umbralMin: 25,  estado: 'Crítico' },
-              { nombre: 'Polo Deportivo Azul',       skuId: 'SKU-005', stockTotal: 140, bodegaA: 90,  bodegaB: 50,  umbralMin: 40,  estado: 'Normal' },
-              { nombre: 'Chaqueta Impermeable',      skuId: 'SKU-006', stockTotal: 22,  bodegaA: 22,  bodegaB: 0,   umbralMin: 15,  estado: 'Bajo' },
-              { nombre: 'Tenis Casual Blanco',       skuId: 'SKU-007', stockTotal: 5,   bodegaA: 2,   bodegaB: 3,   umbralMin: 20,  estado: 'Crítico' },
-              { nombre: 'Gorra Snapback',            skuId: 'SKU-008', stockTotal: 210, bodegaA: 130, bodegaB: 80,  umbralMin: 30,  estado: 'Normal' },
-              { nombre: 'Calcetines Pack x6',        skuId: 'SKU-009', stockTotal: 88,  bodegaA: 50,  bodegaB: 38,  umbralMin: 50,  estado: 'Bajo' },
-              { nombre: 'Cinturón de Cuero',         skuId: 'SKU-010', stockTotal: 310, bodegaA: 170, bodegaB: 140, umbralMin: 30,  estado: 'Normal' }
-            ],
+            products: [], 
+            
+            // LA MAGIA: Esta función trae los datos reales del BFF
+            async fetchProductos() {
+              const token = localStorage.getItem('access_token');
+              
+              if(!token) {
+                 window.location.href = 'pages/login.html';
+                 return;
+              }
+
+              try {
+                // 1. URL CORREGIDA: Apuntamos a /api/productos/ que es lo que dice tu Swagger
+                const response = await fetch('http://127.0.0.1:8000/api/productos', {
+                  method: 'GET',
+                  headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                  }
+                });
+                
+                if (response.ok) {
+                  const datosBackend = await response.json();
+                  
+                  // 2. EL TRADUCTOR: Mapeamos los campos del ms-inventario al HTML
+                  this.products = datosBackend.map(item => ({
+                    nombre: item.nombre,
+                    skuId: item.sku,                     // Backend usa 'sku'
+                    stockTotal: item.stock_actual,       // Backend usa 'stock_actual'
+                    umbralMin: item.umbral_critico,      // Backend usa 'umbral_critico'
+                    estado: item.estado,
+                    bodegaA: item.stock_actual,
+                    bodegaB: 0 
+                  }));
+                  
+                } else if (response.status === 401) {
+                  alert('Tu sesión expiró. Vuelve a iniciar sesión.');
+                  localStorage.removeItem('access_token');
+                  window.location.href = 'pages/login.html';
+                } else {
+                  console.error('Error del servidor:', await response.text());
+                }
+              } catch(error) {
+                console.error('Error de red:', error);
+                alert('No se pudo conectar con el servidor BFF.');
+              }
+            },
+
+            // Las funciones de tu compañero para calcular totales y filtros quedan intactas
             get totalSKUs() { return this.products.length; },
             get stockCritico() { return this.products.filter(p => p.estado === 'Crítico').length; },
             get filteredProducts() {
@@ -626,6 +641,7 @@
             isWarehouseSelected(val) { return this.selectedWarehouses.includes(val); }
           }"
         >
+          <div class="container px-6 mx-auto grid">
           <div class="container px-6 mx-auto grid">
             <h2
               class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
