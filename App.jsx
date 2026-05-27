@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import CreateAccount from './pages/CreateAccount';
-import ForgotPassword from './pages/ForgotPassword';
-import Inventario from './pages/Inventario';
+import Login from './src/pages/Login';
+import CreateAccount from './src/pages/CreateAccount';
+import ForgotPassword from './src/pages/ForgotPassword';
+import Inventario from './src/pages/Inventario';
 
 function App() {
   return (
