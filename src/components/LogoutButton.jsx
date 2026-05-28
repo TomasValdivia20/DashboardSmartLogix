@@ -5,9 +5,9 @@ export default function LogoutButton() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Opcional: Aquí puedes limpiar los datos de sesión si estás usando localStorage o Context
-    // localStorage.removeItem('token');
-    navigate('/login'); // Te lleva a la pantalla de inicio de sesión
+    
+    
+    navigate('/login'); 
   };
 
   return (

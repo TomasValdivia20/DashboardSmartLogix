@@ -24,7 +24,7 @@ export default function Inventario() {
           </div>
           
           <div className="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div className="p-3 mr-4 text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500">
+            <div className="p-3 mr-4 text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd"></path>
               </svg>
@@ -124,10 +124,10 @@ export default function Inventario() {
                   <td className="px-4 py-3 text-sm text-right">20</td>
                   <td className="px-4 py-3 text-sm text-right text-gray-500">10</td>
                   <td className="px-4 py-3 text-xs text-center">
-                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-green-700 bg-green-100">Normal</span>
+                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700">Normal</span>
                   </td>
                   <td className="px-4 py-3 text-xs text-center">
-                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-blue-700 bg-blue-100">Sí</span>
+                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-blue-700 bg-blue-100 dark:text-blue-100 dark:bg-blue-700">Sí</span>
                   </td>
                   <td className="px-4 py-3 text-sm">27/5/2026</td>
                 </tr>
@@ -146,15 +146,15 @@ export default function Inventario() {
                   <td className="px-4 py-3 text-sm">Fragil</td>
                   <td className="px-4 py-3 text-sm text-right">$15000</td>
                   <td className="px-4 py-3 text-sm text-right font-bold">$29990</td>
-                  <td className="px-4 py-3 text-sm text-right font-medium text-red-600">3</td>
+                  <td className="px-4 py-3 text-sm text-right font-medium text-red-600 dark:text-red-400">3</td>
                   <td className="px-4 py-3 text-sm text-right">3</td>
                   <td className="px-4 py-3 text-sm text-right">0</td>
                   <td className="px-4 py-3 text-sm text-right text-gray-500">5</td>
                   <td className="px-4 py-3 text-xs text-center">
-                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-red-700 bg-red-100">Crítico</span>
+                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700">Crítico</span>
                   </td>
                   <td className="px-4 py-3 text-xs text-center">
-                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-blue-700 bg-blue-100">Sí</span>
+                    <span className="px-2 py-1 font-semibold leading-tight rounded-full text-blue-700 bg-blue-100 dark:text-blue-100 dark:bg-blue-700">Sí</span>
                   </td>
                   <td className="px-4 py-3 text-sm">25/5/2026</td>
                 </tr>
