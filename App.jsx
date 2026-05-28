@@ -4,6 +4,7 @@ import Login from './src/pages/Login';
 import CreateAccount from './src/pages/CreateAccount';
 import ForgotPassword from './src/pages/ForgotPassword';
 import Inventario from './src/pages/Inventario';
+import Dashboard from './src/pages/index';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/inventario" element={<Inventario />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

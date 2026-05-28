@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
+import SalesChart from '../components/SalesChart';
+import TrafficChart from '../components/TrafficChart';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -95,43 +97,15 @@ export default function Dashboard() {
         </div>
 
         <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-          Charts
+          Gráficos
         </h2>
         <div className="grid gap-6 mb-8 md:grid-cols-2">
           
-          <div className="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">Revenue</h4>
-            <canvas id="pie"></canvas>
-            <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-              <div className="flex items-center">
-                <span className="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                <span>Camisetas</span>
-              </div>
-              <div className="flex items-center">
-                <span className="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                <span>Zapatos</span>
-              </div>
-              <div className="flex items-center">
-                <span className="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                <span>Bolsos</span>
-              </div>
-            </div>
-          </div>
+          {/* Gráfico de dona funcional integrado con los datos reales */}
+          <SalesChart completadas={typeof envios === 'number' ? envios : 0} pendientes={typeof contactos === 'number' ? contactos : 0} />
 
-          <div className="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <h4 className="mb-4 font-semibold text-gray-800 dark:text-gray-300">Tráfico</h4>
-            <canvas id="line"></canvas>
-            <div className="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-              <div className="flex items-center">
-                <span className="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                <span>Orgánico</span>
-              </div>
-              <div className="flex items-center">
-                <span className="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                <span>Pagado</span>
-              </div>
-            </div>
-          </div>
+          {/* Gráfico de líneas (Tráfico) SVG fluido y adaptativo */}
+          <TrafficChart />
 
         </div>
       </div>
