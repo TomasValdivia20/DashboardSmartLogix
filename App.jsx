@@ -5,6 +5,8 @@ import CreateAccount from './src/pages/CreateAccount';
 import ForgotPassword from './src/pages/ForgotPassword';
 import Inventario from './src/pages/Inventario';
 import Dashboard from './src/pages/index';
+import EditarPerfil from './src/pages/EditarPerfil';
+import CambiarContrasena from './src/pages/CambiarContrasena';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/inventario" element={<Inventario />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/editar-perfil" element={<EditarPerfil />} />
+        <Route path="/cambiar-contrasena" element={<CambiarContrasena />} />
       </Routes>
     </Router>
   );

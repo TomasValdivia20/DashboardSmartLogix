@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Profile from '../pages/Profile';
 
 export default function Navbar() {
   const [inicial, setInicial] = useState('U');
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -40,9 +42,13 @@ export default function Navbar() {
         <ul className="flex items-center flex-shrink-0 space-x-6">
 
           <li className="relative">
-            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300">
+            <button 
+              onClick={() => setIsProfileOpen(true)}
+              className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 flex items-center justify-center text-xs font-bold focus:outline-none transition-colors duration-150 hover:bg-gray-300 dark:hover:bg-gray-600"
+            >
               {inicial}
-            </div>
+            </button>
+            <Profile isOpen={isProfileOpen} onClose={() => setIsProfileOpen(false)} />
           </li>
         </ul>
 
