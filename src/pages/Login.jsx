@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
+import loginLight from '../assets/img/login-office.jpeg';
+import loginDark from '../assets/img/login-office-dark.jpeg';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -33,13 +35,13 @@ export default function Login() {
             <img
               aria-hidden="true"
               className="object-cover w-full h-full dark:hidden"
-              src="/src/assets/img/login-office.jpeg"
+              src={loginLight}
               alt="Office"
             />
             <img
               aria-hidden="true"
               className="hidden object-cover w-full h-full dark:block"
-              src="/src/assets/img/login-office-dark.jpeg"
+              src={loginDark}
               alt="Office"
             />
           </div>

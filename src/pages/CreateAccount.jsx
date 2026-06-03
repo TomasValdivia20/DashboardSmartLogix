@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import createLight from '../assets/img/create-account-office.jpeg';
+import createDark from '../assets/img/create-account-office-dark.jpeg';
 
 export default function CreateAccount() {
   return (
@@ -9,8 +11,8 @@ export default function CreateAccount() {
           
           {/* Columna de la Imagen */}
           <div className="h-32 md:h-auto md:w-1/2">
-            <img aria-hidden="true" className="object-cover w-full h-full dark:hidden" src="/assets/img/create-account-office.jpeg" alt="Office" />
-            <img aria-hidden="true" className="hidden object-cover w-full h-full dark:block" src="/assets/img/create-account-office-dark.jpeg" alt="Office" />
+            <img aria-hidden="true" className="object-cover w-full h-full dark:hidden" src={createLight} alt="Office" />
+            <img aria-hidden="true" className="hidden object-cover w-full h-full dark:block" src={createDark} alt="Office" />
           </div>
 
           {/* Columna del Formulario */}

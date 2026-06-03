@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
+import forgotLight from '../assets/img/forgot-password-office.jpeg';
+import forgotDark from '../assets/img/forgot-password-office-dark.jpeg';
 
 export default function ForgotPassword() {
   return (
@@ -17,13 +19,13 @@ export default function ForgotPassword() {
             <img 
               aria-hidden="true" 
               className="object-cover w-full h-full dark:hidden" 
-              src="/src/assets/img/forgot-password-office.jpeg" 
+              src={forgotLight} 
               alt="Office" 
             />
             <img 
               aria-hidden="true" 
               className="hidden object-cover w-full h-full dark:block" 
-              src="/src/assets/img/forgot-password-office-dark.jpeg" 
+              src={forgotDark} 
               alt="Office" 
             />
           </div>

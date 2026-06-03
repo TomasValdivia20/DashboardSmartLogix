@@ -1,2 +1,25 @@
-node_modules
-PROCESAMIENTO_PEDIDOS_SPEC.md
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# Build output
+dist/
+build/
+
+# Dependencies
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vite
+.vite/
