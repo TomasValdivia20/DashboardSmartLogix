@@ -4,12 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartLogix</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/assets/index-DaW-UCfo.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>:root{--color-naranja:#ff7a00;--color-azul:#0f4c5c;--color-blanco:#fff}html.theme-dark{--color-azul:#2cb1cf;--color-blanco:#1a1c23;color-scheme:dark}.active\:bg-purple-600:active,.bg-purple-600{background-color:var(--color-naranja)!important}.hover\:bg-purple-700:hover{background-color:#e56e00!important}.text-purple-600{color:var(--color-naranja)!important}.border-purple-600{border-color:var(--color-naranja)!important}.focus\:shadow-outline-purple:focus{box-shadow:0 0 0 3px rgba(255,122,0,.45)!important}html.theme-dark body{background-color:#121317!important;color:#f4f5f7!important}:where(html.theme-dark) h1,:where(html.theme-dark) h2,:where(html.theme-dark) h3,:where(html.theme-dark) p,:where(html.theme-dark) span{color:#e5e7eb}html.theme-dark input,html.theme-dark select,html.theme-dark textarea{background-color:#24262d!important;color:#f4f5f7!important;border-color:#4c4f52!important}*,:after,:before{transition:background-color .3s ease-in-out,color .3s ease-in-out,border-color .3s ease-in-out,fill .3s ease-in-out,stroke .3s ease-in-out}</style>
+    <script>
+      /* Inicializador automático de Modo Oscuro */
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('theme-dark');
+      } else {
+        document.documentElement.classList.remove('theme-dark');
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-2oJyHya0.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-Bh1tDfsg.js">
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-D0AIjKkA.js">
     <link rel="stylesheet" crossorigin href="/assets/index-Cms2mssx.css">
   </head>
   <body>
     <div id="root"></div>
-    
+    
   </body>
 </html>

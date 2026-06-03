@@ -23,3 +23,7 @@ Thumbs.db
 
 # Vite
 .vite/
+
+#Md para ignorar
+planesmd
+
