@@ -3,11 +3,7 @@
   "outputDirectory": "dist",
   "devCommand": "vite",
   "installCommand": "npm install",
-  "env": {
-    "VITE_API_TIMEOUT": "@vite_api_timeout",
-    "VITE_APP_NAME": "@vite_app_name",
-    "VITE_APP_ENVIRONMENT": "@vite_app_environment"
-  },
+  "env": {},
   "headers": [
     {
       "source": "/(.*)",
