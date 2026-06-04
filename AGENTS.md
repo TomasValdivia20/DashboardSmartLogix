@@ -7,7 +7,6 @@ Desplegado en **Vercel** (framework auto-detectado: Vite).
 
 - **Repo:** `github.com/TomasValdivia20/DashboardSmartLogix`
 - **Rama principal:** `main`
-- **Ruta local:** `E:\SmartLogixRepositorio\DashboardSmartLogix-Front`
 - **URL producción:** `https://dashboard-smart-logix-raddpxb2j-tomasvaldivia20s-projects.vercel.app`
 
 ## Comandos del proyecto
@@ -35,8 +34,13 @@ Desplegado en **Vercel** (framework auto-detectado: Vite).
 | `vercel logs` | Ver logs en tiempo real |
 | `vercel integration add <name>` | Instalar integración del Marketplace |
 
-> ⚠️ Si `vercel` no reconoce la sesión, exportar el token:
-> `$env:VERCEL_TOKEN = (Get-Content "$HOME\.vercel\auth.json" -Raw | ConvertFrom-Json).token`
+> ⚠️ Si `vercel` no reconoce la sesión, exportar el token desde `~/.vercel/auth.json`:
+> ```bash
+> # PowerShell
+> $env:VERCEL_TOKEN = (Get-Content "$HOME\.vercel\auth.json" -Raw | ConvertFrom-Json).token
+> # Bash / Zsh
+> export VERCEL_TOKEN=$(jq -r .token ~/.vercel/auth.json)
+> ```
 
 ## Proyecto en Vercel
 
@@ -50,7 +54,7 @@ Desplegado en **Vercel** (framework auto-detectado: Vite).
 
 ## MCP server de Vercel (disponible)
 
-El agente tiene acceso al **MCP server oficial de Vercel** (`https://mcp.vercel.com`) configurado en `~/.config/opencode/opencode.jsonc`.
+El agente tiene acceso al **MCP server oficial de Vercel** (`https://mcp.vercel.com`) configurado globalmente en opencode (ver `~/.config/opencode/opencode.jsonc`).
 
 Usar para:
 - Listar/gestionar proyectos
@@ -63,7 +67,7 @@ Si opencode no responde a las tools del MCP, autorizar en el navegador cuando lo
 
 ## Skills instaladas
 
-- **`vercel-cli`** (en `~\.agents\skills\vercel-cli`) — conocimiento profundo de la CLI de Vercel. Se activa automáticamente cuando el agente trabaja con Vercel.
+- **`vercel-cli`** (en `~/.agents/skills/vercel-cli/`) — conocimiento profundo de la CLI de Vercel. Se activa automáticamente cuando el agente trabaja con Vercel.
 
 ## Estructura del proyecto
 
