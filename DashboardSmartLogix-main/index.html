@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLogix</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/assets/css/tailwind.output.css" />
+    <style>
+      :root {
+        --color-naranja: #ff7a00;
+        --color-azul: #0f4c5c;
+        --color-blanco: #ffffff;
+      }
+
+      /* Ajustes de colores para el Modo Oscuro */
+      html.theme-dark {
+        --color-azul: #2cb1cf; /* Un azul/teal más claro y brillante para que resalte en fondos oscuros */
+        --color-blanco: #1a1c23; /* En modo oscuro, los fondos blancos de las tarjetas se vuelven oscuros */
+        color-scheme: dark;
+      }
+
+      /* 
+       * Sobrescribimos las clases moradas que vienen por defecto en el template
+       * para que tomen el color naranja automáticamente
+       */
+      .bg-purple-600, .active\:bg-purple-600:active {
+        background-color: var(--color-naranja) !important;
+      }
+      .hover\:bg-purple-700:hover {
+        background-color: #e56e00 !important; /* Naranja oscuro al pasar el mouse */
+      }
+      .text-purple-600 {
+        color: var(--color-naranja) !important;
+      }
+      .border-purple-600 {
+        border-color: var(--color-naranja) !important;
+      }
+      .focus\:shadow-outline-purple:focus {
+        box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.45) !important;
+      }
+
+      /* 
+       * Garantizar que las letras y fondos se noten bien en modo oscuro 
+       * en todos los paneles (Login, Gestión, etc.)
+       */
+      html.theme-dark body {
+        background-color: #121317 !important;
+        color: #f4f5f7 !important;
+      }
+      
+      /* Usamos :where para mejorar la legibilidad del texto sin romper tus clases directas de Tailwind */
+      :where(html.theme-dark) h1, 
+      :where(html.theme-dark) h2, 
+      :where(html.theme-dark) h3, 
+      :where(html.theme-dark) p, 
+      :where(html.theme-dark) span {
+        color: #e5e7eb;
+      }
+
+      /* Forzar estilo en los Inputs y Formularios para que sean legibles y no queden blancos ciegos */
+      html.theme-dark input, html.theme-dark select, html.theme-dark textarea {
+        background-color: #24262d !important;
+        color: #f4f5f7 !important;
+        border-color: #4c4f52 !important;
+      }
+
+      /* 
+       * Transición suave global para el cambio de tema (Modo Oscuro / Claro).
+       * Esto asegura que fondos, textos, bordes y SVG se desvanezcan al mismo tiempo.
+       */
+      *, *::before, *::after {
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, 
+                    border-color 0.3s ease-in-out, fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
+      }
+    </style>
+    <script>
+      /* Inicializador automático de Modo Oscuro */
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('theme-dark');
+      } else {
+        document.documentElement.classList.remove('theme-dark');
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
