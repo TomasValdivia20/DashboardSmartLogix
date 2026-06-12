@@ -73,6 +73,27 @@
         transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, 
                     border-color 0.3s ease-in-out, fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
       }
+
+      /* Botón Siguiente — negro en modo claro, naranja en oscuro */
+      html:not(.theme-dark) .btn-siguiente {
+        background-color: #111827 !important;
+        color: #ffffff !important;
+      }
+      html.theme-dark .btn-siguiente {
+        background-color: #f97316 !important;
+        color: #ffffff !important;
+      }
+
+      /* Tarjeta de costos — fondo oscuro en modo oscuro */
+      html.theme-dark .cost-card {
+        background-color: #1f2937 !important;
+        border-color: #4b5563 !important;
+      }
+
+      /* Pedido seleccionado — fondo oscuro en modo oscuro */
+      html.theme-dark .pedido-seleccionado {
+        background-color: #4b5563 !important;
+      }
     </style>
     <script>
       /* Inicializador automático de Modo Oscuro */

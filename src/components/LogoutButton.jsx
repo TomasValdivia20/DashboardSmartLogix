@@ -5,9 +5,8 @@ export default function LogoutButton() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    
-    
-    navigate('/login'); 
+    localStorage.removeItem('access_token');
+    navigate('/login');
   };
 
   return (
