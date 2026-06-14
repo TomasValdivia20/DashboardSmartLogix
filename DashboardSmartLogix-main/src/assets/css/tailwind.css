@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body, aside, header, main, div, p, span, h4, table, th, td, button, input {
-    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-  }
-}
