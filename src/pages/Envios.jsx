@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Layout from '../components/Layout';
+import ModalPortal from '../components/ModalPortal';
 import MapaLogistico from '../components/MapaLogistico';
 import { getVehiculos } from '../services/vehiculosService';
 import { createEnvio, calcularCostos, createRuta, calcularRuta, getRuta } from '../services/enviosService';
@@ -300,8 +301,9 @@ export default function Envios() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border dark:border-gray-700 w-full max-w-4xl flex flex-col overflow-hidden" style={{ height: '85vh' }}>
+        <ModalPortal>
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border dark:border-gray-700 w-full max-w-4xl flex flex-col overflow-hidden animate-modal-enter" style={{ height: '85vh' }}>
             {/* HEADER */}
             <div className="flex justify-between items-center px-6 pt-6 pb-0">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">
@@ -714,12 +716,14 @@ export default function Envios() {
             )}
           </div>
         </div>
+        </ModalPortal>
       )}
 
       {/* MODAL ELIMINAR */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-80 text-center border dark:border-gray-700">
+        <ModalPortal>
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-80 text-center border dark:border-gray-700 animate-modal-enter">
             <p className="text-sm font-medium text-gray-700 dark:text-gray-100 mb-6">
               ¿Desea cancelar y eliminar este envío del sistema?
             </p>
@@ -739,6 +743,7 @@ export default function Envios() {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </Layout>
   );

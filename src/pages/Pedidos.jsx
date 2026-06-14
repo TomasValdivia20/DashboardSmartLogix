@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
+import ModalPortal from '../components/ModalPortal';
 
 export default function Pedidos() {
   const [pedidos, setPedidos] = useState([]);
@@ -115,8 +116,9 @@ export default function Pedidos() {
 
       {/* MODAL AGREGAR PEDIDO */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 inline-block border dark:border-gray-700">
+        <ModalPortal>
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 inline-block border dark:border-gray-700 animate-modal-enter">
             <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white border-b dark:border-gray-700 pb-2 uppercase tracking-wide">
               AGREGAR PEDIDO
             </h3>
@@ -182,12 +184,14 @@ export default function Pedidos() {
             </form>
           </div>
         </div>
+        </ModalPortal>
       )}
 
       {/* MODAL ELIMINAR */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-80 text-center border dark:border-gray-700">
+        <ModalPortal>
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-80 text-center border dark:border-gray-700 animate-modal-enter">
             <p className="text-sm font-medium text-gray-700 dark:text-gray-100 mb-6">
               ¿Desea eliminar este usuario de la lista de pedidos?
             </p>
@@ -207,6 +211,7 @@ export default function Pedidos() {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </Layout>
   );
