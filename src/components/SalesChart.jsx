@@ -34,8 +34,8 @@ export default function SalesChart({ completadas = 75, pendientes = 25 }) {
             cy="18" 
             r="15.915" 
             fill="none" 
-            style={{ stroke: '#0f4c5c' }} 
-            className="opacity-90 dark:opacity-100" 
+            className="text-gray-300 dark:text-gray-600 opacity-90 dark:opacity-100" 
+            style={{ stroke: 'currentColor' }} 
             strokeWidth="3.5"
           ></circle>
           
@@ -45,8 +45,9 @@ export default function SalesChart({ completadas = 75, pendientes = 25 }) {
             cy="18" 
             r="15.915" 
             fill="none" 
+            className="text-orange-500"
             style={{ 
-              stroke: '#ff7a00',
+              stroke: 'currentColor',
              
               strokeDashoffset: dashOffset, 
               transition: 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)' 

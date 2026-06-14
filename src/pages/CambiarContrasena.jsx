@@ -83,7 +83,7 @@ export default function CambiarContrasena() {
               
               <button 
                 type="submit" 
-                className="px-6 py-2.5 text-sm font-medium text-center text-white bg-purple-600 transition-colors duration-150 border border-transparent rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-md shadow-purple-500/30"
+                className="px-6 py-2.5 text-sm font-medium text-center text-white bg-orange-500 transition-colors duration-150 border border-transparent rounded-lg hover:bg-orange-600 focus:outline-none focus:shadow-outline-purple shadow-md shadow-purple-500/30"
               >
                 Actualizar
               </button>

@@ -5,12 +5,12 @@ export default function ThemeToggle({ className, isSidebarItem = false }) {
 
   useEffect(() => {
     // Sincronizar el estado inicial con la clase del HTML
-    setIsDark(document.documentElement.classList.contains('theme-dark'));
+    setIsDark(document.documentElement.classList.contains('dark'));
   }, []);
 
   // Función para alternar el modo oscuro
   const alternarTema = () => {
-    const dark = document.documentElement.classList.toggle('theme-dark');
+    const dark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', dark ? 'dark' : 'light');
     setIsDark(dark);
   };

@@ -8,7 +8,7 @@ SPA en **Vite 8 + React 19 + react-router-dom 7**. Desplegado en **Vercel**.
 - **Estilos:** Tailwind CSS v1 (PostCSS), NO CSS-in-JS
 - **Prettier:** singleQuote, sin semicolon (`.prettierrc`)
 - **Branding:** Windmill template con colores morados sobrescritos a naranja SmartLogix (`#ff7a00`). Colores personalizados `smart.{naranja,azul,blanco}` en `tailwind.config.js`
-- **Modo oscuro:** clase `theme-dark` en `<html>`, persistido en `localStorage.theme`. Lo maneja `ThemeToggle.jsx`. Transiciones globales en `index.html`
+- **Modo oscuro:** clase `dark` en `<html>`, persistido en `localStorage.theme`. Lo maneja `ThemeToggle.jsx`. Transiciones y overrides globales en `index.html` (Tailwind v1 no soporta `darkMode: 'class'`)
 
 ## Comandos
 

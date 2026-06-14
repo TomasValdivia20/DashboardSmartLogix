@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "tailwind": "tailwindcss build public/assets/css/tailwind.css -o public/assets/css/tailwind.output.css",
-    "build:css": "env NODE_ENV=production postcss public/assets/css/tailwind.css -o public/assets/css/tailwind.output.css  ",
+    "build:css": "set NODE_ENV=production&& postcss public/assets/css/tailwind.css -o public/assets/css/tailwind.output.css",
     "build": "npm run build:css && vite build",
     "test": "vitest",
     "test:run": "vitest run",

@@ -380,7 +380,7 @@ export default function Envios() {
                     {pedidosFiltrados.map((p) => (
                       <label
                         key={p.id}
-                      className={`flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 ${
+                      className={`flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 ${
                         selectedIds.has(p.id) ? 'pedido-seleccionado bg-orange-50' : ''
                       }`}
                       >
@@ -478,7 +478,7 @@ export default function Envios() {
                             <button
                               onClick={() => handleCalcularItem(item)}
                               disabled={item.calculando || !item.vehiculoId}
-                              className="px-3 py-2 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                              className="px-3 py-2 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 dark:bg-blue-800 disabled:opacity-50"
                             >
                               {item.calculando ? 'Calculando...' : item.costos ? 'Recalcular' : 'Calcular'}
                             </button>
@@ -533,7 +533,7 @@ export default function Envios() {
                             </div>
                           </div>
                         )}
-                        {item.error && <p className="mt-2 text-xs text-red-500">{item.error}</p>}
+                        {item.error && <p className="mt-2 text-xs text-red-500 dark:text-red-400">{item.error}</p>}
                       </div>
                     ))}
                   </div>
@@ -655,13 +655,13 @@ export default function Envios() {
                       href={googleMapsUrl(itemsDespacho)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 text-center"
+                      className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 dark:bg-blue-800 text-center"
                     >
                       Abrir en Google Maps
                     </a>
                     <button
                       onClick={() => setIsModalOpen(false)}
-                      className="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-600"
+                      className="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-600 dark:bg-gray-700 dark:hover:bg-gray-600"
                     >
                       Cerrar
                     </button>
@@ -697,7 +697,7 @@ export default function Envios() {
                     <button
                       onClick={() => setDespachoStep(3)}
                       disabled={!todosCalculados}
-                      className="px-4 py-2 text-sm font-medium text-orange bg-orange-500 rounded-lg hover:bg-orange-600 focus:outline-none shadow-md"
+                      className="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-600 dark:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none shadow-md"
                     >
                       {todosCalculados ? `Ver Resumen` : 'Calcula todos los costos primero'}
                     </button>
@@ -706,7 +706,7 @@ export default function Envios() {
                     <button
                       onClick={handleCrearDespacho}
                       disabled={enviando}
-                      className="px-6 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none shadow-md disabled:opacity-50"
+                      className="px-6 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 dark:bg-green-800 focus:outline-none shadow-md disabled:opacity-50"
                     >
                       {enviando ? 'Creando...' : `Confirmar Despacho ($${totalDespacho.toLocaleString('es-CL')})`}
                     </button>
@@ -736,7 +736,7 @@ export default function Envios() {
               </button>
               <button
                 onClick={handleConfirmarEliminar}
-                className="px-4 py-2 text-xs font-semibold uppercase text-white bg-red-600 hover:bg-red-700 rounded focus:outline-none"
+                className="px-4 py-2 text-xs font-semibold uppercase text-white bg-red-600 hover:bg-red-700 dark:bg-red-800 rounded focus:outline-none"
               >
                 Sí
               </button>

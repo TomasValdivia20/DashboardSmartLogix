@@ -59,7 +59,7 @@ export default function Inventario() {
           <div className="flex flex-col gap-1">
             <label className="text-xs font-semibold text-gray-500 uppercase dark:text-gray-400">Bodega</label>
             <div className="flex flex-wrap gap-2">
-              <button className="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none bg-purple-600 text-white border-purple-600">Todas</button>
+              <button className="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none bg-orange-500 text-white border-orange-500">Todas</button>
               <button className="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">Bodega Central</button>
               <button className="px-3 py-1 text-sm font-medium border rounded-full transition-colors duration-150 focus:outline-none bg-white text-gray-600 border-gray-300 hover:border-purple-400 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">Sucursal Norte</button>
             </div>
@@ -77,7 +77,7 @@ export default function Inventario() {
             </div>
           </div>
           <div className="flex items-end">
-            <button className="flex items-center px-4 py-2 text-sm font-medium leading-5 text-white bg-purple-600 border border-transparent rounded-lg hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            <button className="flex items-center px-4 py-2 text-sm font-medium leading-5 text-white bg-orange-500 border border-transparent rounded-lg hover:bg-orange-600 focus:outline-none focus:shadow-outline-purple">
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"></path></svg>
               Agregar Producto
             </button>
@@ -110,11 +110,11 @@ export default function Inventario() {
                   <td className="px-4 py-3">
                     <div className="flex flex-col">
                       <span className="text-sm font-semibold">Teclado Mecánico RGB</span>
-                      <span className="text-xs text-gray-500">SKU-001</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">SKU-001</span>
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="text-xs text-gray-500 whitespace-normal w-48">Teclado layout latinoamericano switches red.</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 whitespace-normal w-48">Teclado layout latinoamericano switches red.</div>
                   </td>
                   <td className="px-4 py-3 text-sm">General</td>
                   <td className="px-4 py-3 text-sm text-right">$25000</td>
@@ -122,7 +122,7 @@ export default function Inventario() {
                   <td className="px-4 py-3 text-sm text-right font-medium">50</td>
                   <td className="px-4 py-3 text-sm text-right">30</td>
                   <td className="px-4 py-3 text-sm text-right">20</td>
-                  <td className="px-4 py-3 text-sm text-right text-gray-500">10</td>
+                  <td className="px-4 py-3 text-sm text-right text-gray-500 dark:text-gray-400">10</td>
                   <td className="px-4 py-3 text-xs text-center">
                     <span className="px-2 py-1 font-semibold leading-tight rounded-full text-green-700 bg-green-100 dark:text-green-100 dark:bg-green-700">Normal</span>
                   </td>
@@ -137,11 +137,11 @@ export default function Inventario() {
                   <td className="px-4 py-3">
                     <div className="flex flex-col">
                       <span className="text-sm font-semibold">Mouse Gamer Inalámbrico</span>
-                      <span className="text-xs text-gray-500">SKU-002</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">SKU-002</span>
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="text-xs text-gray-500 whitespace-normal w-48">Mouse sensor óptico 16000 DPI.</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 whitespace-normal w-48">Mouse sensor óptico 16000 DPI.</div>
                   </td>
                   <td className="px-4 py-3 text-sm">Fragil</td>
                   <td className="px-4 py-3 text-sm text-right">$15000</td>
@@ -149,7 +149,7 @@ export default function Inventario() {
                   <td className="px-4 py-3 text-sm text-right font-medium text-red-600 dark:text-red-400">3</td>
                   <td className="px-4 py-3 text-sm text-right">3</td>
                   <td className="px-4 py-3 text-sm text-right">0</td>
-                  <td className="px-4 py-3 text-sm text-right text-gray-500">5</td>
+                  <td className="px-4 py-3 text-sm text-right text-gray-500 dark:text-gray-400">5</td>
                   <td className="px-4 py-3 text-xs text-center">
                     <span className="px-2 py-1 font-semibold leading-tight rounded-full text-red-700 bg-red-100 dark:text-red-100 dark:bg-red-700">Crítico</span>
                   </td>
@@ -161,7 +161,7 @@ export default function Inventario() {
               </tbody>
             </table>
           </div>
-          <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:bg-gray-800">
+          <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:bg-gray-800">
             <span className="flex items-center col-span-3">
               Mostrando <span className="mx-1 font-bold">2</span> de <span className="mx-1 font-bold">2</span> productos
             </span>

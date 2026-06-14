@@ -14,7 +14,7 @@
       }
 
       /* Ajustes de colores para el Modo Oscuro */
-      html.theme-dark {
+      html.dark {
         --color-azul: #2cb1cf; /* Un azul/teal más claro y brillante para que resalte en fondos oscuros */
         --color-blanco: #1a1c23; /* En modo oscuro, los fondos blancos de las tarjetas se vuelven oscuros */
         color-scheme: dark;
@@ -44,22 +44,78 @@
        * Garantizar que las letras y fondos se noten bien en modo oscuro 
        * en todos los paneles (Login, Gestión, etc.)
        */
-      html.theme-dark body {
+      html.dark body {
         background-color: #121317 !important;
         color: #f4f5f7 !important;
       }
       
-      /* Usamos :where para mejorar la legibilidad del texto sin romper tus clases directas de Tailwind */
-      :where(html.theme-dark) h1, 
-      :where(html.theme-dark) h2, 
-      :where(html.theme-dark) h3, 
-      :where(html.theme-dark) p, 
-      :where(html.theme-dark) span {
-        color: #e5e7eb;
+      /* 
+       * Forzar fondo oscuro en los contenedores principales (sidebar, navbar, cards, tablas, etc.) 
+       * cuando la clase .dark está presente en <html>.
+       * Tailwind v1 no soporta la sintaxis darkMode: 'class', usamos !important como safety net.
+       */
+      html.dark .bg-white {
+        background-color: #1f2937 !important;
+      }
+      html.dark .bg-gray-50 {
+        background-color: #1a1c23 !important;
+      }
+
+      /* Todas las escalas de grises → más claras en modo oscuro */
+      html.dark .text-gray-100 { color: #f9fafb !important; }
+      html.dark .text-gray-200 { color: #f3f4f6 !important; }
+      html.dark .text-gray-300 { color: #e5e7eb !important; }
+      html.dark .text-gray-400 { color: #d1d5db !important; }
+      html.dark .text-gray-500 { color: #9ca3af !important; }
+      html.dark .text-gray-600 { color: #d1d5db !important; }
+      html.dark .text-gray-700 { color: #e5e7eb !important; }
+      html.dark .text-gray-800 { color: #f3f4f6 !important; }
+      html.dark .text-gray-900 { color: #f3f4f6 !important; }
+
+      /* Estados activos de botones ghost/secondary en oscuro */
+      html.dark .active\:text-gray-500:active { color: #9ca3af !important; }
+
+      /* Colores semánticos → más claros en modo oscuro (badges, links, icons) */
+      html.dark .text-green-400 { color: #4ade80 !important; }
+      html.dark .text-green-500 { color: #4ade80 !important; }
+      html.dark .text-green-600 { color: #4ade80 !important; }
+      html.dark .text-green-700 { color: #4ade80 !important; }
+      html.dark .text-red-400  { color: #fca5a5 !important; }
+      html.dark .text-red-500  { color: #f87171 !important; }
+      html.dark .text-red-600  { color: #f87171 !important; }
+      html.dark .text-red-700  { color: #f87171 !important; }
+      html.dark .text-blue-500 { color: #60a5fa !important; }
+      html.dark .text-blue-600 { color: #60a5fa !important; }
+      html.dark .text-blue-700 { color: #60a5fa !important; }
+      html.dark .text-orange-400 { color: #fb923c !important; }
+      html.dark .text-orange-500 { color: #fb923c !important; }
+      html.dark .text-orange-600 { color: #fb923c !important; }
+      html.dark .text-orange-700 { color: #fb923c !important; }
+      html.dark .text-purple-300 { color: #d8b4fe !important; }
+      html.dark .text-purple-400 { color: #c084fc !important; }
+      html.dark .text-purple-500 { color: #c084fc !important; }
+      html.dark .text-teal-500   { color: #2dd4bf !important; }
+
+      /* Valores arbitrarios inline — dark mode forzado */
+      html.dark .text-\[\#0f4c5c\] { color: white !important; }
+
+      /* Hover/focus de texto en oscuro */
+      html.dark .hover\:text-gray-600:hover { color: #d1d5db !important; }
+      html.dark .hover\:text-gray-800:hover { color: #f3f4f6 !important; }
+      html.dark .hover\:text-gray-200:hover { color: #f3f4f6 !important; }
+      html.dark .hover\:border-gray-500:hover { border-color: #6b7280 !important; }
+
+      /* Bordes de separación → más sutiles en oscuro */
+      html.dark .border-gray-100,
+      html.dark .border-gray-200 {
+        border-color: #374151 !important;
+      }
+      html.dark .border-gray-300 {
+        border-color: #4b5563 !important;
       }
 
       /* Forzar estilo en los Inputs y Formularios para que sean legibles y no queden blancos ciegos */
-      html.theme-dark input, html.theme-dark select, html.theme-dark textarea {
+      html.dark input, html.dark select, html.dark textarea {
         background-color: #24262d !important;
         color: #f4f5f7 !important;
         border-color: #4c4f52 !important;
@@ -75,32 +131,55 @@
       }
 
       /* Botón Siguiente — negro en modo claro, naranja en oscuro */
-      html:not(.theme-dark) .btn-siguiente {
+      html:not(.dark) .btn-siguiente {
         background-color: #111827 !important;
         color: #ffffff !important;
       }
-      html.theme-dark .btn-siguiente {
+      html.dark .btn-siguiente {
         background-color: #f97316 !important;
         color: #ffffff !important;
       }
 
       /* Tarjeta de costos — fondo oscuro en modo oscuro */
-      html.theme-dark .cost-card {
+      html.dark .cost-card {
         background-color: #1f2937 !important;
         border-color: #4b5563 !important;
       }
 
       /* Pedido seleccionado — fondo oscuro en modo oscuro */
-      html.theme-dark .pedido-seleccionado {
+      html.dark .pedido-seleccionado {
         background-color: #4b5563 !important;
+      }
+
+      /* Líneas de cuadrícula en charts SVG — adaptables a modo oscuro */
+      .chart-grid-line {
+        stroke: #2d3748;
+      }
+      html.dark .chart-grid-line {
+        stroke: #4a5568;
+      }
+
+      @keyframes modal-slide-up {
+        from {
+          opacity: 0;
+          transform: translateY(50px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .animate-modal-enter {
+        animation: modal-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       }
     </style>
     <script>
       /* Inicializador automático de Modo Oscuro */
       if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('theme-dark');
+        document.documentElement.classList.add('dark');
       } else {
-        document.documentElement.classList.remove('theme-dark');
+        document.documentElement.classList.remove('dark');
       }
     </script>
   </head>

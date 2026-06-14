@@ -28,10 +28,10 @@ export default function TrafficChart() {
         <svg className="w-full h-full" viewBox="0 0 500 200" preserveAspectRatio="none">
           
           {/* LÍNEAS DE FONDO (Guías horizontales grises) */}
-          <line x1="0" y1="40" x2="500" y2="40" stroke="#2d3748" strokeWidth="1" strokeDasharray="5,5" />
-          <line x1="0" y1="90" x2="500" y2="90" stroke="#2d3748" strokeWidth="1" strokeDasharray="5,5" />
-          <line x1="0" y1="140" x2="500" y2="140" stroke="#2d3748" strokeWidth="1" strokeDasharray="5,5" />
-          <line x1="0" y1="190" x2="500" y2="190" stroke="#2d3748" strokeWidth="1" />
+          <line x1="0" y1="40" x2="500" y2="40" className="chart-grid-line" strokeWidth="1" strokeDasharray="5,5" />
+          <line x1="0" y1="90" x2="500" y2="90" className="chart-grid-line" strokeWidth="1" strokeDasharray="5,5" />
+          <line x1="0" y1="140" x2="500" y2="140" className="chart-grid-line" strokeWidth="1" strokeDasharray="5,5" />
+          <line x1="0" y1="190" x2="500" y2="190" className="chart-grid-line" strokeWidth="1" />
 
           {/* LÍNEA 1: TRÁFICO ORGÁNICO (Línea Azul/Cian) */}
           <path

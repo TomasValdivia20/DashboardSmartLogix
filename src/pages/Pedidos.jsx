@@ -204,7 +204,7 @@ export default function Pedidos() {
               </button>
               <button 
                 onClick={handleConfirmarEliminar} 
-                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-red-600 hover:bg-red-700 rounded transition-colors duration-150 focus:outline-none shadow-sm"
+                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-red-600 hover:bg-red-700 dark:bg-red-800 rounded transition-colors duration-150 focus:outline-none shadow-sm"
               >
                 Sí
               </button>
