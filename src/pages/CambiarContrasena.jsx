@@ -26,17 +26,17 @@ export default function CambiarContrasena() {
   return (
     <Layout>
       <div className="container px-6 mx-auto grid">
-        <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-          Cambiar Contraseña
-        </h2>
+          <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-white">
+            Cambiar Contraseña
+          </h2>
 
-        <div className="px-6 py-8 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800 max-w-2xl border border-gray-100 dark:border-gray-700 flex flex-col">
+        <div className="px-6 py-8 mb-8 bg-white rounded-lg shadow-md dark:bg-black max-w-2xl border border-gray-100 dark:border-gray-700 flex flex-col">
           <form onSubmit={handleSubmit} className="flex flex-col">
             
             <div className="flex flex-col gap-6">
               {/* Campo: Contraseña Actual */}
               <label className="block text-sm">
-                <span className="text-gray-700 dark:text-gray-400 font-medium mb-2 block">Contraseña actual</span>
+                <span className="text-gray-700 dark:text-white font-medium mb-2 block">Contraseña actual</span>
                 <input
                   type="password"
                   placeholder="••••••••"
@@ -47,7 +47,7 @@ export default function CambiarContrasena() {
               
               {/* Campo: Nueva Contraseña */}
               <label className="block text-sm">
-                <span className="text-gray-700 dark:text-gray-400 font-medium mb-2 block">Nueva contraseña</span>
+                <span className="text-gray-700 dark:text-white font-medium mb-2 block">Nueva contraseña</span>
                 <input
                   type="password"
                   placeholder="••••••••"
@@ -60,7 +60,7 @@ export default function CambiarContrasena() {
               
               {/* Campo: Confirmar Nueva Contraseña */}
               <label className="block text-sm">
-                <span className="text-gray-700 dark:text-gray-400 font-medium mb-2 block">Confirmar nueva contraseña</span>
+                <span className="text-gray-700 dark:text-white font-medium mb-2 block">Confirmar nueva contraseña</span>
                 <input
                   type="password"
                   placeholder="••••••••"

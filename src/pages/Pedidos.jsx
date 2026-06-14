@@ -117,8 +117,8 @@ export default function Pedidos() {
       {/* MODAL AGREGAR PEDIDO */}
       {isModalOpen && (
         <ModalPortal>
-        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 inline-block border dark:border-gray-700 animate-modal-enter">
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 modal-overlay" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96 inline-block border dark:border-gray-700 animate-modal-enter modal-content">
             <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white border-b dark:border-gray-700 pb-2 uppercase tracking-wide">
               AGREGAR PEDIDO
             </h3>
@@ -176,7 +176,7 @@ export default function Pedidos() {
                 </button>
                 <button 
                   type="submit" 
-                  className="px-4 py-2 text-sm font-medium leading-5 transition-colors duration-150 rounded-lg focus:outline-none shadow-md text-white bg-orange-500 hover:bg-orange-600 active:bg-orange-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200"
+                  className="px-4 py-2 text-sm font-medium leading-5 transition-colors duration-150 rounded-lg focus:outline-none shadow-md !text-white !bg-orange-500 hover:!bg-orange-600 active:!bg-orange-600"
                 >
                   Guardar
                 </button>
@@ -190,8 +190,8 @@ export default function Pedidos() {
       {/* MODAL ELIMINAR */}
       {deleteTarget && (
         <ModalPortal>
-        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-80 text-center border dark:border-gray-700 animate-modal-enter">
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 modal-overlay" style={{ paddingTop: '18vh', transform: 'translateZ(0)' }}>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-80 text-center border dark:border-gray-700 animate-modal-enter modal-content">
             <p className="text-sm font-medium text-gray-700 dark:text-gray-100 mb-6">
               ¿Desea eliminar este usuario de la lista de pedidos?
             </p>

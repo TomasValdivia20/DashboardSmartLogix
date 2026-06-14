@@ -47,7 +47,7 @@ export default function Profile({ isOpen, onClose }) {
               onClose();
               navigate('/cambiar-contrasena');
             }}
-            className="flex items-center justify-center w-full min-h-[56px] px-4 py-3 mb-4 text-sm font-medium text-gray-800 bg-gray-200 border border-transparent rounded-xl dark:text-white dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all focus:outline-none"
+            className="flex items-center justify-center w-full min-h-[56px] px-4 py-3 mb-4 text-sm font-medium text-white bg-orange-500 border border-transparent rounded-xl dark:text-white dark:bg-orange-600 hover:bg-orange-600 dark:hover:bg-orange-700 transition-all focus:outline-none"
           >
             <svg
               className="w-5 h-5 mr-3"
@@ -74,7 +74,7 @@ export default function Profile({ isOpen, onClose }) {
               onClose();
               navigate('/editar-perfil');
             }}
-            className="flex items-center justify-center w-full min-h-[56px] px-4 py-3 text-sm font-medium border border-transparent rounded-xl transition-all text-gray-800 bg-gray-200 dark:text-white dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none"
+            className="flex items-center justify-center w-full min-h-[56px] px-4 py-3 text-sm font-medium border border-transparent rounded-xl transition-all text-white bg-orange-500 dark:text-white dark:bg-orange-600 hover:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none"
           >
               <svg
                 className="w-5 h-5 mr-3"

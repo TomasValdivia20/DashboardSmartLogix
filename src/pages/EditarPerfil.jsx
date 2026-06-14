@@ -26,17 +26,17 @@ export default function EditarPerfil() {
   return (
     <Layout>
       <div className="container px-6 mx-auto grid">
-        <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-          Editar Perfil
-        </h2>
+          <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-white">
+            Editar Perfil
+          </h2>
 
-        <div className="px-6 py-8 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800 max-w-2xl border border-gray-100 dark:border-gray-700 flex flex-col">
+        <div className="px-6 py-8 mb-8 bg-white rounded-lg shadow-md dark:bg-black max-w-2xl border border-gray-100 dark:border-gray-700 flex flex-col">
           <form onSubmit={handleSubmit} className="flex flex-col">
             
             <div className="flex flex-col gap-6">
               {/* Campo: Nombre Completo */}
               <label className="block text-sm">
-                <span className="text-gray-700 dark:text-gray-400 font-medium mb-2 block">Nombre completo</span>
+                <span className="text-gray-700 dark:text-white font-medium mb-2 block">Nombre completo</span>
                 <input
                   type="text"
                   required
@@ -49,7 +49,7 @@ export default function EditarPerfil() {
               
               {/* Campo: Dirección de Correo */}
               <label className="block text-sm">
-                <span className="text-gray-700 dark:text-gray-400 font-medium mb-2 block">Dirección de correo</span>
+                <span className="text-gray-700 dark:text-white font-medium mb-2 block">Dirección de correo</span>
                 <input
                   type="email"
                   required
