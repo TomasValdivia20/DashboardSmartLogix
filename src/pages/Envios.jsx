@@ -211,8 +211,8 @@ export default function Envios() {
           geo = null;
         }
         const envioData = {
-          codigo_seguimiento: `ENV-${String(rutas.length + enviosCreados.length + 1).padStart(3, '0')}`,
-          referencia_externa_id: item.pedidoId,
+          codigo_seguimiento: `ENV-${Date.now().toString(36).toUpperCase()}-${String(rutas.length + enviosCreados.length + 1).padStart(2, '0')}`,
+          referencia_externa_id: String(item.pedidoId),
           valor_base_producto: item.pedido.valor_base,
           requiere_instalacion: item.requiereInstalacion,
           costo_final: item.costos,
@@ -223,21 +223,17 @@ export default function Envios() {
           ruta: rutaId,
           estado: 'Asignado',
         };
+        console.log('Payload createEnvio:', JSON.stringify(envioData, null, 2));
         const res = await createEnvio(envioData);
         enviosCreados.push(res.data);
       }
     } catch (err) {
       console.error('Error en handleCrearDespacho (crear ruta/envios):', err);
-      for (const item of itemsDespacho) {
-        enviosCreados.push({
-          id: crypto.randomUUID(),
-          codigo_seguimiento: `ENV-${String(rutas.length + enviosCreados.length + 1).padStart(3, '0')}`,
-          referencia_externa_id: item.pedidoId,
-          direccion_destino: item.pedido.direccion,
-          comuna: null,
-          estado: 'Bodega',
-        });
-      }
+      console.error('Respuesta completa del servidor:', JSON.stringify(err.response?.data, null, 2));
+      const msg = err.response?.data?.error || err.response?.data?.detail || err.message || 'Error al crear el despacho';
+      alert('Error al crear el despacho: ' + msg);
+      setEnviando(false);
+      return;
     }
 
     try {

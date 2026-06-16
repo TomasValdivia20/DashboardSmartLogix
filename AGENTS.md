@@ -29,12 +29,14 @@ SPA en **Vite 8 + React 19 + react-router-dom 7**. Desplegado en **Vercel**.
 
 ## Backend: ms-envios (hermano del frontend)
 
-`ms-envios/` al mismo nivel. Django 6 + DRF. Swagger en `http://localhost:8000/api/docs/`.
+`ms-envios/` al mismo nivel. Django 6 + DRF + drf-spectacular. Swagger en `http://localhost:8006/api/docs/`. Prefijo `VITE_API_URL=http://localhost:8006/api/envios`.
 
 ```powershell
 cd ..\ms-envios
-.venv\Scripts\python.exe manage.py runserver 8000
+.venv\Scripts\python.exe manage.py runserver 8006
 ```
+
+⚠️ `ms-envios/` no tiene `requirements.txt` — solo existe `.venv/` preconstruido. Si necesitas reinstalar, usa `pip freeze > requirements.txt` primero o instala desde el `.venv/`.
 
 Endpoints clave: `/vehiculos/`, `/repartidores/`, `/rutas/`, `/rutas/{id}/calcular/`, `/envios/`, `/calcular-costos/`. Ver schema completo en Swagger.
 

@@ -9,17 +9,37 @@ export default function Login() {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
 
-    localStorage.setItem('access_token', 'mock_token_12345');
-    
-    const userInfo = { email: email };
-    localStorage.setItem('user_info', JSON.stringify(userInfo));
+    const bffUrl = import.meta.env.VITE_BFF_URL || 'http://127.0.0.1:8000/api';
 
-    // Cambiamos la redirección para que te lleve directo al Dashboard con la gráfica
-    navigate('/dashboard');
+    setLoading(true);
+    try {
+      const res = await fetch(`${bffUrl}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.access_token) {
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('user_info', JSON.stringify(data.usuario || { email }));
+        navigate('/dashboard');
+      } else {
+        setError(data.error || data.detail || 'Credenciales incorrectas');
+      }
+    } catch {
+      setError('Error de conexión con el servidor');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,11 +97,15 @@ export default function Login() {
                   />
                 </label>
 
+                {error && (
+                  <p className="mt-4 text-sm font-medium text-red-600 dark:text-red-400 text-center">{error}</p>
+                )}
                 <button
                   type="submit"
-                  className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-orange-500 border border-transparent rounded-lg active:bg-orange-600 hover:bg-orange-600 focus:outline-none focus:shadow-outline-purple"
+                  disabled={loading}
+                  className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-orange-500 border border-transparent rounded-lg active:bg-orange-600 hover:bg-orange-600 focus:outline-none focus:shadow-outline-purple disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Inicia sesión
+                  {loading ? 'Ingresando...' : 'Inicia sesión'}
                 </button>
               </form>
 
