@@ -1,18 +1,35 @@
-const pedidosMock = [
-  { id: '10372', cliente: 'Fabian Cuevas', direccion: 'Av. Providencia 1234, Santiago', valor_base: '45000.00' },
-  { id: '10234', cliente: 'Juan Perez', direccion: 'Av. Apoquindo 456, Las Condes', valor_base: '32500.00' },
-  { id: '10232', cliente: 'Carlos Ruiz', direccion: 'Gran Avenida 789, San Miguel', valor_base: '28000.00' },
-  { id: '10230', cliente: 'Luis Torres', direccion: 'Av. Matta 1010, Santiago Centro', valor_base: '52000.00' },
-  { id: '10228', cliente: 'Maria Soto', direccion: 'Los Héroes 555, Ñuñoa', valor_base: '18750.00' },
-  { id: '10225', cliente: 'Pedro Ramirez', direccion: 'Vitacura 3200, Las Condes', valor_base: '67300.00' },
-  { id: '10222', cliente: 'Ana Gonzalez', direccion: 'Irarrázaval 1234, Ñuñoa', valor_base: '41000.00' },
-];
+import axios from 'axios';
 
-export const getPedidos = () => {
-  return Promise.resolve({ data: pedidosMock });
-};
+const bffApi = axios.create({
+  baseURL: import.meta.env.VITE_BFF_URL || 'http://127.0.0.1:8000/api',
+  timeout: 30000,
+  headers: { 'Content-Type': 'application/json' },
+});
 
-export const getPedido = (id) => {
-  const pedido = pedidosMock.find((p) => p.id === id);
-  return Promise.resolve({ data: pedido });
-};
+bffApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+bffApi.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('access_token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+export const getPedidos = () => bffApi.get('/pedidos');
+export const getPedido = (id) => bffApi.get(`/pedidos/${id}/`);
+export const createPedido = (data) => bffApi.post('/crear-pedido', data);
+export const aprobarPedido = (id) => bffApi.patch(`/pedidos/${id}/aprobar`);
+export const enviarPedido = (id) => bffApi.patch(`/pedidos/${id}/enviar`);
+export const entregarPedido = (id) => bffApi.patch(`/pedidos/${id}/entregar`);
+export const getGuia = (id) => bffApi.get(`/pedidos/${id}/guia`);
+export const generarGuia = (id) => bffApi.post(`/pedidos/${id}/guia`);
+export const getBodegas = () => bffApi.get('/bodegas');
+export const getProductos = () => bffApi.get('/productos');
