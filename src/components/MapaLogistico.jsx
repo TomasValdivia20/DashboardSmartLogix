@@ -50,13 +50,13 @@ export default function MapaLogistico({
         <Marker longitude={-70.6506} latitude={-33.4372} color="#f97316" />
 
         {envios.map((envio) => {
-          if (!envio.lat || !envio.lng) return null;
+          if (!envio.latitud || !envio.longitud) return null;
           const seleccionado = envioSeleccionadoId === envio.id;
           return (
             <Marker
               key={envio.id}
-              longitude={envio.lng}
-              latitude={envio.lat}
+              longitude={parseFloat(envio.longitud)}
+              latitude={parseFloat(envio.latitud)}
               color={seleccionado ? '#ff3366' : '#3b82f6'}
               onClick={() => onEnvioClick && onEnvioClick(envio.id)}
               style={{ cursor: 'pointer' }}

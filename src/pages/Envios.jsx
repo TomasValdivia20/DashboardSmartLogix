@@ -30,7 +30,7 @@ const PATENTE_CONDUCTOR = {
 function googleMapsUrl(items) {
   const base = 'https://www.google.com/maps/dir/?api=1';
   const origin = 'Bodega+Central,+Santiago,+Chile';
-  const dests = items.map((it) => encodeURIComponent(it.pedido.direccion));
+  const dests = items.map((it) => encodeURIComponent(it.pedido.destinatario_direccion));
   if (dests.length === 0) return base;
   const destination = dests[dests.length - 1];
   const waypoints = dests.slice(0, -1).join('|');
@@ -142,9 +142,9 @@ export default function Envios() {
     try {
       const payload = {
         vehiculo_id: item.vehiculoId,
-        valor_base_producto: item.pedido.valor_base,
+        valor_base_producto: item.pedido.total,
         requiere_instalacion: item.requiereInstalacion,
-        direccion_destino: item.pedido.direccion,
+        direccion_destino: item.pedido.destinatario_direccion,
       };
       const res = await calcularCostos(payload);
       actualizarItem(item.pedidoId, { costos: res.data, calculando: false });
@@ -204,7 +204,7 @@ export default function Envios() {
       for (const item of itemsDespacho) {
         let geo;
         try {
-          const geoRes = await geocodificar(item.pedido.direccion);
+          const geoRes = await geocodificar(item.pedido.destinatario_direccion);
           geo = geoRes.data;
         } catch (err) {
           console.error('Error al geocodificar dirección:', err);
@@ -213,10 +213,10 @@ export default function Envios() {
         const envioData = {
           codigo_seguimiento: `ENV-${Date.now().toString(36).toUpperCase()}-${String(rutas.length + enviosCreados.length + 1).padStart(2, '0')}`,
           referencia_externa_id: String(item.pedidoId),
-          valor_base_producto: item.pedido.valor_base,
+          valor_base_producto: item.pedido.total,
           requiere_instalacion: item.requiereInstalacion,
           costo_final: item.costos,
-          direccion_destino: item.pedido.direccion,
+          direccion_destino: item.pedido.destinatario_direccion,
           comuna: geo?.comuna || null,
           latitud: geo?.latitud || '-33.4372',
           longitud: geo?.longitud || '-70.6506',
@@ -260,7 +260,7 @@ export default function Envios() {
   };
 
   const pedidosFiltrados = pedidosDisponibles.filter(
-    (p) => p.id.includes(busquedaPedido) || p.cliente.toLowerCase().includes(busquedaPedido.toLowerCase()),
+    (p) => p.id.includes(busquedaPedido) || p.destinatario_nombre.toLowerCase().includes(busquedaPedido.toLowerCase()),
   );
 
   const totalDespacho = itemsDespacho.reduce(
@@ -668,12 +668,12 @@ export default function Envios() {
                           />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
-                              #{p.id} - {p.cliente}
+                              #{p.id} - {p.destinatario_nombre}
                             </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{p.direccion}</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{p.destinatario_direccion}</p>
                           </div>
                           <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 shrink-0">
-                            ${Number(p.valor_base).toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                            ${Number(p.total).toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                           </span>
                         </label>
                       ))}
@@ -704,12 +704,12 @@ export default function Envios() {
                           <div className="flex justify-between items-start mb-3">
                             <div>
                               <p className="text-sm font-bold text-gray-800 dark:text-gray-200">
-                                #{item.pedido.id} - {item.pedido.cliente}
+                                #{item.pedido.id} - {item.pedido.destinatario_nombre}
                               </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">{item.pedido.direccion}</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">{item.pedido.destinatario_direccion}</p>
                             </div>
                             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 shrink-0">
-                              ${Number(item.pedido.valor_base).toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                              ${Number(item.pedido.total).toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                             </span>
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -853,7 +853,7 @@ export default function Envios() {
                               <td className="px-3 py-2 font-semibold text-gray-800 dark:text-gray-200">
                                 #{item.pedidoId}
                               </td>
-                              <td className="px-3 py-2 text-gray-700 dark:text-gray-300">{item.pedido.cliente}</td>
+                              <td className="px-3 py-2 text-gray-700 dark:text-gray-300">{item.pedido.destinatario_nombre}</td>
                               <td className="px-3 py-2 text-right text-gray-700 dark:text-gray-300">
                                 ${Number(item.costos.valor_base).toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                               </td>
